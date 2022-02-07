@@ -12,8 +12,8 @@ namespace TestEnumerator
 
         public CustomStringEnumerator(IEnumerable<string> collection, EnumeratorConfig config)
         {
-            this._collection = collection ?? throw new ArgumentNullException();
-            this._config = config ?? throw new ArgumentNullException();
+            _collection = collection ?? throw new ArgumentNullException();
+            _config = config ?? throw new ArgumentNullException();
         }
 
         public IEnumerator<string> GetEnumerator()

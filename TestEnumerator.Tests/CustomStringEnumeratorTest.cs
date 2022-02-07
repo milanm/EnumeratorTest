@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace TestEnumerator.Tests
@@ -10,7 +9,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenTwoWordsWithCapitalsLetterSouldReturnTwo()
         {
-            var collection = new string[] { "Milan", "Milanovic", "" };
+            var collection = new [] { "Milan", "Milanovic", "" };
 
 
             var config = new EnumeratorConfig
@@ -29,7 +28,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenTwoWordsWithCapitalLettersNoMinLengthSouldReturnThree()
         {
-            var collection = new string[] { "Milan", "Milanovic", "" };
+            var collection = new [] { "Milan", "Milanovic", "" };
 
             var config = new EnumeratorConfig
             {
@@ -47,7 +46,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenTwoWordsWithCapitalLetterNoMinLengthWithNullSouldReturnFour()
         {
-            var collection = new string[] { "Milan", "Milanovic", "", "test", null};
+            var collection = new [] { "Milan", "Milanovic", "", "test", null};
 
             var config = new EnumeratorConfig
             {
@@ -66,13 +65,12 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenOneWordsWithDigitSouldReturnOne()
         {
-            var collection = new string[] { "Milan", "Milanovic", "", "test", "123" };
+            var collection = new [] { "Milan", "Milanovic", "", "test", "123" };
 
             var config = new EnumeratorConfig
             {
                 MinLength = 1,
                 MaxLength = 10,
-                StartWithCapitalLetter = false,
                 StartWithDigit = true
             };
 
@@ -85,13 +83,12 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenOneWordsWithDigitNotInLengthSouldReturnZero()
         {
-            var collection = new string[] { "Milan", "Milanovic", "", "test", "123" };
+            var collection = new [] { "Milan", "Milanovic", "", "test", "123" };
 
             var config = new EnumeratorConfig
             {
                 MinLength = 1,
                 MaxLength = 2,
-                StartWithCapitalLetter = false,
                 StartWithDigit = true
             };
 
@@ -104,7 +101,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenOneWordWithinLengthSouldReturnOne()
         {
-            var collection = new string[] { "Milan", "Milanovic", "test", "parabolic" };
+            var collection = new [] { "Milan", "Milanovic", "test", "parabolic" };
 
             var config = new EnumeratorConfig
             {
@@ -122,7 +119,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenOneWordWithinLengthAndNullSouldReturnOne()
         {
-            var collection = new string[] { "Milan", "Milanovic", "test", "parabolic", null };
+            var collection = new [] { "Milan", "Milanovic", "test", "parabolic", null };
 
             var config = new EnumeratorConfig
             {
@@ -134,6 +131,23 @@ namespace TestEnumerator.Tests
             var count = enumerator.ToList().Count;
 
             Assert.AreEqual(1, count);
+        }
+
+        [TestMethod]
+        public void WhenOneWordWithinLengthAndCapitalLetterAndNullSouldReturnOne()
+        {
+            var collection = new [] { "Milan", "Milanovic", "test", "parabolic", null };
+
+            var config = new EnumeratorConfig
+            {
+                MaxLength = 5,
+                StartWithCapitalLetter = true,
+            };
+
+            var enumerator = new CustomStringEnumerator(collection, config);
+            var count = enumerator.ToList().Count;
+
+            Assert.AreEqual(2, count);
         }
 
     }
