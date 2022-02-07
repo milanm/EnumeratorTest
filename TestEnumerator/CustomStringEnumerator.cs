@@ -28,46 +28,46 @@ namespace TestEnumerator
 
         private IEnumerable<string> GetCollection()
         {
-            foreach (var s in _collection)
+            foreach (var stringValue in _collection)
             {
                 if (_config.MinLength != -1)
                 {
-                    if (string.IsNullOrEmpty(s) && _config.MinLength <= 0 || s!.Length < _config.MinLength)
+                    if (string.IsNullOrEmpty(stringValue) && _config.MinLength <= 0 || stringValue!.Length < _config.MinLength)
                         continue;
                 }
 
-                if (!string.IsNullOrEmpty(s))
+                if (!string.IsNullOrEmpty(stringValue))
                 {
                     if (_config.StartWithCapitalLetter)
                     {
-                        if (!char.IsUpper(s, 0))
+                        if (!char.IsUpper(stringValue, 0))
                             continue;
                     }
                     else
                     {
-                        if (char.IsUpper(s, 0))
+                        if (char.IsUpper(stringValue, 0))
                             continue;
                     }
 
                     if (_config.StartWithDigit)
                     {
-                        if (!char.IsDigit(s, 0))
+                        if (!char.IsDigit(stringValue, 0))
                             continue;
                     }
                     else
                     {
-                        if (char.IsDigit(s, 0))
+                        if (char.IsDigit(stringValue, 0))
                             continue;
                     }
 
                     if (_config.MaxLength != -1)
                     {
-                        if (s.Length > _config.MaxLength)
+                        if (stringValue.Length > _config.MaxLength)
                             continue;
                     }
 
                 } 
-                yield return s;
+                yield return stringValue;
             }
         }
     }
