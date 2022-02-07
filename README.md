@@ -1,0 +1,3 @@
+# EnumeratorTest
+
+Codility test
