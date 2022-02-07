@@ -82,6 +82,24 @@ namespace TestEnumerator.Tests
             Assert.AreEqual(1, count);
         }
 
+        [TestMethod]
+        public void WhenOneWordsWithDigitNotInLengthSouldReturnZero()
+        {
+            var collection = new string[] { "Milan", "Milanovic", "", "test", "123" };
+
+            var config = new EnumeratorConfig
+            {
+                MinLength = 1,
+                MaxLength = 2,
+                StartWithCapitalLetter = false,
+                StartWithDigit = true
+            };
+
+            var enumerator = new CustomStringEnumerator(collection, config);
+            var count = enumerator.ToList().Count;
+
+            Assert.AreEqual(0, count);
+        }
 
         [TestMethod]
         public void WhenOneWordWithinLengthSouldReturnOne()
