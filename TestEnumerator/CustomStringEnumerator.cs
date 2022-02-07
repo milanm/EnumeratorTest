@@ -7,24 +7,13 @@ namespace TestEnumerator
 {
     public class CustomStringEnumerator : IEnumerable<string>
     {
-        // string list 
-        readonly IEnumerable<string> collection;
-        readonly EnumeratorConfig config;
+        private readonly IEnumerable<string> _collection;
+        private readonly EnumeratorConfig _config;
 
         public CustomStringEnumerator(IEnumerable<string> collection, EnumeratorConfig config)
         {
-            if(collection == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (config == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            this.collection = collection;
-            this.config = config;
+            this._collection = collection ?? throw new ArgumentNullException();
+            this._config = config ?? throw new ArgumentNullException();
         }
 
         public IEnumerator<string> GetEnumerator()
@@ -39,24 +28,43 @@ namespace TestEnumerator
 
         private IEnumerable<string> GetCollection()
         {
-            foreach (var s in collection)
+            foreach (var s in _collection)
             {
-                if (config.MinLength != -1)
-                    if ((string.IsNullOrEmpty(s) && config.MinLength <= 0) || s.Length < config.MinLength)
+                if (_config.MinLength != -1)
+                {
+                    if ((string.IsNullOrEmpty(s) && _config.MinLength <= 0) || s!.Length < _config.MinLength)
                         continue;
+                }
 
-                if (config.MaxLength != -1)
-                    if (!string.IsNullOrEmpty(s) && s.Length > config.MaxLength)
+                if (_config.MaxLength != -1)
+                {
+                    if (!string.IsNullOrEmpty(s) && s.Length > _config.MaxLength)
                         continue;
+                }
 
                 if (!string.IsNullOrEmpty(s))
                 {
-                    if (config.StartWithCapitalLetter)
+                    if (_config.StartWithCapitalLetter)
+                    {
                         if (!char.IsUpper(s, 0))
                             continue;
-                    if (config.StartWithDigit)
+                    }
+                    else
+                    {
+                        if (char.IsUpper(s, 0))
+                            continue;
+                    }
+
+                    if (_config.StartWithDigit)
+                    {
                         if (!char.IsDigit(s, 0))
                             continue;
+                    }
+                    else
+                    {
+                        if (char.IsDigit(s, 0))
+                            continue;
+                    }
                 
                 } 
                 yield return s;

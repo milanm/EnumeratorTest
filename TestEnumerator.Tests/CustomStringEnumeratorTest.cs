@@ -84,16 +84,32 @@ namespace TestEnumerator.Tests
 
 
         [TestMethod]
-        public void WhenOneWordWithinLengthWithDigitSouldReturnOne()
+        public void WhenOneWordWithinLengthSouldReturnOne()
         {
             var collection = new string[] { "Milan", "Milanovic", "test", "parabolic" };
 
             var config = new EnumeratorConfig
             {
                 MinLength = 6,
-                MaxLength = 10,
-                StartWithCapitalLetter = false,
-                StartWithDigit = false
+                MaxLength = 10
+            };
+
+            var enumerator = new CustomStringEnumerator(collection, config);
+            var count = enumerator.ToList().Count;
+
+            Assert.AreEqual(1, count);
+        }
+
+
+        [TestMethod]
+        public void WhenOneWordWithinLengthAndNullSouldReturnOne()
+        {
+            var collection = new string[] { "Milan", "Milanovic", "test", "parabolic", null };
+
+            var config = new EnumeratorConfig
+            {
+                MinLength = 0,
+                MaxLength = 5
             };
 
             var enumerator = new CustomStringEnumerator(collection, config);
