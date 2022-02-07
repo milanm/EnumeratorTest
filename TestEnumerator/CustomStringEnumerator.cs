@@ -36,12 +36,6 @@ namespace TestEnumerator
                         continue;
                 }
 
-                if (_config.MaxLength != -1)
-                {
-                    if (!string.IsNullOrEmpty(s) && s.Length > _config.MaxLength)
-                        continue;
-                }
-
                 if (!string.IsNullOrEmpty(s))
                 {
                     if (_config.StartWithCapitalLetter)
@@ -65,7 +59,13 @@ namespace TestEnumerator
                         if (char.IsDigit(s, 0))
                             continue;
                     }
-                
+
+                    if (_config.MaxLength != -1)
+                    {
+                        if (s.Length > _config.MaxLength)
+                            continue;
+                    }
+
                 } 
                 yield return s;
             }
