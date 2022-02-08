@@ -150,5 +150,42 @@ namespace TestEnumerator.Tests
             Assert.AreEqual(2, count);
         }
 
+        [TestMethod]
+        public void WhenTwoWordsWithCapitalAndOneWithDigitAndInLengthSouldReturnZero()
+        {
+            var collection = new[] { "Milan", "Milanovic", "", "test", "123" };
+
+            var config = new EnumeratorConfig
+            {
+                MinLength = 1,
+                MaxLength = 10,
+                StartWithDigit = true,
+                StartWithCapitalLetter = true
+            };
+
+            var enumerator = new CustomStringEnumerator(collection, config);
+            var count = enumerator.ToList().Count;
+
+            Assert.AreEqual(0, count);
+        }
+
+
+        [TestMethod]
+        public void WhenTwoWordsWithDigitAndInLengthSouldReturnTwo()
+        {
+            var collection = new[] { "Milan", "Milanovic", "", "test", "123", "5555", null };
+
+            var config = new EnumeratorConfig
+            {
+                MinLength = 3,
+                MaxLength = 5,
+                StartWithDigit = true,
+            };
+
+            var enumerator = new CustomStringEnumerator(collection, config);
+            var count = enumerator.ToList().Count;
+
+            Assert.AreEqual(2, count);
+        }
     }
 }

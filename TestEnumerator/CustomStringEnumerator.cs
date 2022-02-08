@@ -32,7 +32,7 @@ namespace TestEnumerator
             {
                 if (_config.MinLength != -1)
                 {
-                    if (string.IsNullOrEmpty(stringValue) && _config.MinLength <= 0 || stringValue!.Length < _config.MinLength)
+                    if (string.IsNullOrEmpty(stringValue) || stringValue!.Length < _config.MinLength)
                         continue;
                 }
 
