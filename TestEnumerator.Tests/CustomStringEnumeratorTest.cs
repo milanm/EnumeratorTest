@@ -9,8 +9,8 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenTwoWordsWithCapitalsLetterSouldReturnTwo()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "" };
-
 
             var config = new EnumeratorConfig
             {
@@ -19,15 +19,18 @@ namespace TestEnumerator.Tests
                 StartWithCapitalLetter = true
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(2, count);           
         }
 
         [TestMethod]
         public void WhenTwoWordsWithCapitalLettersNoMinLengthSouldReturnThree()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "" };
 
             var config = new EnumeratorConfig
@@ -37,15 +40,18 @@ namespace TestEnumerator.Tests
                 StartWithCapitalLetter = true
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(3, count);
         }
 
         [TestMethod]
         public void WhenTwoWordsWithCapitalLetterNoMinLengthWithNullSouldReturnFour()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "", "test", null};
 
             var config = new EnumeratorConfig
@@ -55,9 +61,11 @@ namespace TestEnumerator.Tests
                 StartWithCapitalLetter = true
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(4, count);
         }
 
@@ -65,6 +73,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenOneWordsWithDigitSouldReturnOne()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "", "test", "123" };
 
             var config = new EnumeratorConfig
@@ -74,15 +83,18 @@ namespace TestEnumerator.Tests
                 StartWithDigit = true
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(1, count);
         }
 
         [TestMethod]
         public void WhenOneWordsWithDigitNotInLengthSouldReturnZero()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "", "test", "123" };
 
             var config = new EnumeratorConfig
@@ -92,15 +104,18 @@ namespace TestEnumerator.Tests
                 StartWithDigit = true
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(0, count);
         }
 
         [TestMethod]
         public void WhenOneWordWithinLengthSouldReturnOne()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "test", "parabolic" };
 
             var config = new EnumeratorConfig
@@ -109,9 +124,11 @@ namespace TestEnumerator.Tests
                 MaxLength = 10
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(1, count);
         }
 
@@ -119,6 +136,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenOneWordWithinLengthAndNullSouldReturnOne()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "test", "parabolic", null };
 
             var config = new EnumeratorConfig
@@ -127,15 +145,18 @@ namespace TestEnumerator.Tests
                 MaxLength = 5
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(1, count);
         }
 
         [TestMethod]
         public void WhenOneWordWithinLengthAndCapitalLetterAndNullSouldReturnOne()
         {
+            // Arrange
             var collection = new [] { "Milan", "Milanovic", "test", "parabolic", null };
 
             var config = new EnumeratorConfig
@@ -144,15 +165,18 @@ namespace TestEnumerator.Tests
                 StartWithCapitalLetter = true,
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(2, count);
         }
 
         [TestMethod]
         public void WhenTwoWordsWithCapitalAndOneWithDigitAndInLengthSouldReturnZero()
         {
+            // Arrange
             var collection = new[] { "Milan", "Milanovic", "", "test", "123" };
 
             var config = new EnumeratorConfig
@@ -163,9 +187,11 @@ namespace TestEnumerator.Tests
                 StartWithCapitalLetter = true
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(0, count);
         }
 
@@ -173,6 +199,7 @@ namespace TestEnumerator.Tests
         [TestMethod]
         public void WhenTwoWordsWithDigitAndInLengthSouldReturnTwo()
         {
+            // Arrange
             var collection = new[] { "Milan", "Milanovic", "", "test", "123", "5555", null };
 
             var config = new EnumeratorConfig
@@ -182,9 +209,11 @@ namespace TestEnumerator.Tests
                 StartWithDigit = true,
             };
 
+            // Act
             var enumerator = new CustomStringEnumerator(collection, config);
             var count = enumerator.ToList().Count;
 
+            // Assert
             Assert.AreEqual(2, count);
         }
     }
